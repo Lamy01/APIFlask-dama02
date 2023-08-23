@@ -69,7 +69,7 @@ def fermer_compte_client(config, numero_compte):
    
     try:
         connection = connect_to_database(config)
-        query = f"UPDATE clients SET etat = 'fermé' WHERE numero_compte = '{numero_compte}'"
+        req = f"UPDATE clients SET etat = '0' WHERE numero_compte = '{numero_compte}'"
         execute_query(connection, query)
         close_connection(connection)
         return {"message": f"Le compte {numero_compte} a été fermé avec succès."}
@@ -82,7 +82,7 @@ def modifier_informations_client(config, numero_compte, champ_a_modifier, nouvel
     
     try:
         connection = connect_to_database(config)
-        query = f"UPDATE clients SET {champ_a_modifier} = '{nouvelle_valeur}' WHERE numero_compte = '{numero_compte}'"
+        req = f"UPDATE clients SET {champ_a_modifier} = '{nouvelle_valeur}' WHERE numero_compte = '{numero_compte}'"
         execute_query(connection, query)
         close_connection(connection)
         return {"message": f"Le champ {champ_a_modifier} du compte {numero_compte} a été modifié avec succès."}
@@ -94,7 +94,7 @@ def ajouter_argent_compte(config, numero_compte, montant):
     
     try:
         connection = connect_to_database(config)
-        query = f"UPDATE clients SET solde = solde + {montant} WHERE numero_compte = '{numero_compte}'"
+        req = f"UPDATE clients SET solde = solde + {montant} WHERE numero_compte = '{numero_compte}'"
         execute_query(connection, query)
         close_connection(connection)
         return {"message": f"Le montant de {montant} a été ajouté au compte {numero_compte} avec succès."}
@@ -107,7 +107,7 @@ def ramener_solde_zero(config, numero_compte):
     
     try:
         connection = connect_to_database(config)
-        query = f"UPDATE clients SET solde = 0 WHERE numero_compte = '{numero_compte}'"
+        req = f"UPDATE clients SET solde = 0 WHERE numero_compte = '{numero_compte}'"
         execute_query(connection, query)
         close_connection(connection)
         return {"message": f"Le solde du compte {numero_compte} a été ramené à zéro avec succès."}
